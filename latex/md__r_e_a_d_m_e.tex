@@ -1,0 +1,386 @@
+\chapter{README }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{README@{README}}
+\href{https://travis-ci.com/coma123/Spring-Boot-Blog-REST-API}{\texttt{}} \href{https://sonarcloud.io/dashboard?id=coma123_Spring-Boot-Blog-REST-API}{\texttt{}} \href{https://bestpractices.coreinfrastructure.org/projects/3706}{\texttt{}}\hypertarget{md__r_e_a_d_m_e_autotoc_md0}{}\doxysection{\texorpdfstring{Spring Boot, My\+SQL, Spring Security, JWT, JPA, Rest API}{Spring Boot, My\+SQL, Spring Security, JWT, JPA, Rest API}}\label{md__r_e_a_d_m_e_autotoc_md0}
+Build Restful CRUD API for a blog using Spring Boot, Mysql, JPA and Hibernate.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysubsection{\texorpdfstring{Steps to Setup}{Steps to Setup}}\label{md__r_e_a_d_m_e_autotoc_md1}
+{\bfseries{1. Clone the application}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/coma123/Spring-\/Boot-\/Blog-\/REST-\/API.git}
+
+\end{DoxyCode}
+
+
+{\bfseries{2. Create Mysql database}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{create\ database\ blogapi}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item run {\ttfamily src/main/resources/blogapi.\+sql}
+\end{DoxyItemize}
+
+{\bfseries{3. Change mysql username and password as per your installation}}
+
+
+\begin{DoxyItemize}
+\item open {\ttfamily src/main/resources/application.\+properties}
+\item change {\ttfamily spring.\+datasource.\+username} and {\ttfamily spring.\+datasource.\+password} as per your mysql installation
+\end{DoxyItemize}
+
+{\bfseries{4. Run the app using maven}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ spring-\/boot:run}
+
+\end{DoxyCode}
+ The app will start running at \href{http://localhost:8080}{\texttt{http\+://localhost\+:8080}}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{\texorpdfstring{Explore Rest APIs}{Explore Rest APIs}}\label{md__r_e_a_d_m_e_autotoc_md2}
+The app defines following CRUD APIs.\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{Auth}{Auth}}\label{md__r_e_a_d_m_e_autotoc_md3}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Decription  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Decription  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endhead
+POST  &/api/auth/signup  &Sign up  &JSON  \\\cline{1-4}
+POST  &/api/auth/signin  &Log in  &JSON  \\\cline{1-4}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsubsection{\texorpdfstring{Users}{Users}}\label{md__r_e_a_d_m_e_autotoc_md4}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endhead
+GET  &/api/users/me  &Get logged in user profile  &\\\cline{1-4}
+GET  &/api/users/\{username\}/profile  &Get user profile by username  &\\\cline{1-4}
+GET  &/api/users/\{username\}/posts  &Get posts created by user  &\\\cline{1-4}
+GET  &/api/users/\{username\}/albums  &Get albums created by user  &\\\cline{1-4}
+GET  &/api/users/check\+Username\+Availability  &Check if username is available to register  &\\\cline{1-4}
+GET  &/api/users/check\+Email\+Availability  &Check if email is available to register  &\\\cline{1-4}
+POST  &/api/users  &Add user (Only for admins)  &JSON  \\\cline{1-4}
+PUT  &/api/users/\{username\}  &Update user (If profile belongs to logged in user or logged in user is admin)  &JSON  \\\cline{1-4}
+DELETE  &/api/users/\{username\}  &Delete user (For logged in user or admin)  &\\\cline{1-4}
+PUT  &/api/users/\{username\}/give\+Admin  &Give admin role to user (only for admins)  &\\\cline{1-4}
+PUT  &/api/users/\{username\}/\+Take\+Admin  &Take admin role from user (only for admins)  &\\\cline{1-4}
+PUT  &/api/users/set\+Or\+Update\+Info  &Update user profile (If profile belongs to logged in user or logged in user is admin)  &JSON  \\\cline{1-4}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsubsection{\texorpdfstring{Posts}{Posts}}\label{md__r_e_a_d_m_e_autotoc_md5}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endhead
+GET  &/api/posts  &Get all posts  &\\\cline{1-4}
+GET  &/api/posts/\{id\}  &Get post by id  &\\\cline{1-4}
+POST  &/api/posts  &Create new post (By logged in user)  &JSON  \\\cline{1-4}
+PUT  &/api/posts/\{id\}  &Update post (If post belongs to logged in user or logged in user is admin)  &JSON  \\\cline{1-4}
+DELETE  &/api/posts/\{id\}  &Delete post (If post belongs to logged in user or logged in user is admin)  &\\\cline{1-4}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{Comments}{Comments}}\label{md__r_e_a_d_m_e_autotoc_md6}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endhead
+GET  &/api/posts/\{post\+Id\}/comments  &Get all comments which belongs to post with id = post\+Id  &\\\cline{1-4}
+GET  &/api/posts/\{post\+Id\}/comments/\{id\}  &Get comment by id if it belongs to post with id = post\+Id  &\\\cline{1-4}
+POST  &/api/posts/\{post\+Id\}/comments  &Create new comment for post with id = post\+Id (By logged in user)  &JSON  \\\cline{1-4}
+PUT  &/api/posts/\{post\+Id\}/comments/\{id\}  &Update comment by id if it belongs to post with id = post\+Id (If comment belongs to logged in user or logged in user is admin)  &JSON  \\\cline{1-4}
+DELETE  &/api/posts/\{post\+Id\}/comments/\{id\}  &Delete comment by id if it belongs to post with id = post\+Id (If comment belongs to logged in user or logged in user is admin)  &\\\cline{1-4}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{Albums}{Albums}}\label{md__r_e_a_d_m_e_autotoc_md7}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endhead
+GET  &/api/albums  &Get all albums  &\\\cline{1-4}
+GET  &/api/albums/\{id\}  &Get album by id  &\\\cline{1-4}
+POST  &/api/albums  &Create new album (By logged in user)  &JSON  \\\cline{1-4}
+PUT  &/api/albums/\{id\}  &Update album (If album belongs to logged in user or logged in user is admin)  &JSON  \\\cline{1-4}
+DELETE  &/api/albums/\{id\}  &Delete album (If album belongs to logged in user or logged in user is admin)  &\\\cline{1-4}
+GET  &/api/albums/\{id\}/photos  &Get all photos which belongs to album with id = id  &\\\cline{1-4}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsubsection{\texorpdfstring{Photos}{Photos}}\label{md__r_e_a_d_m_e_autotoc_md8}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endhead
+GET  &/api/photos  &Get all photos  &\\\cline{1-4}
+GET  &/api/photos/\{id\}  &Get photo by id  &\\\cline{1-4}
+POST  &/api/photos  &Create new photo (By logged in user)  &JSON  \\\cline{1-4}
+PUT  &/api/photos/\{id\}  &Update photo (If photo belongs to logged in user or logged in user is admin)  &JSON  \\\cline{1-4}
+DELETE  &/api/photos/\{id\}  &Delete photo (If photo belongs to logged in user or logged in user is admin)  &\\\cline{1-4}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsubsection{\texorpdfstring{Todos}{Todos}}\label{md__r_e_a_d_m_e_autotoc_md9}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Method  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Url  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Sample Valid Request Body  }\\\cline{1-4}
+\endhead
+GET  &/api/todos  &Get all todos which belongs to logged in user  &\\\cline{1-4}
+GET  &/api/todos/\{id\}  &Get todo by id (If todo belongs to logged in user)  &\\\cline{1-4}
+POST  &/api/todos  &Create new todo (By logged in user)  &JSON  \\\cline{1-4}
+PUT  &/api/todos/\{id\}  &Update todo (If todo belongs to logged in user)  &JSON  \\\cline{1-4}
+DELETE  &/api/todos/\{id\}  &Delete todo (If todo belongs to logged in user)  &\\\cline{1-4}
+PUT  &/api/todos/\{id\}/complete  &Mark todo as complete (If todo belongs to logged in user)  &\\\cline{1-4}
+PUT  &/api/todos/\{id\}/un\+Complete  &Mark todo as uncomplete (If todo belongs to logged in user)  &\\\cline{1-4}
+\end{longtabu}
+
+
+Test them using postman or any other rest client.\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{Sample Valid JSON Request Bodys}{Sample Valid JSON Request Bodys}}\label{md__r_e_a_d_m_e_autotoc_md10}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_signup}%
+Sign Up -\/\texorpdfstring{$>$}{>} /api/auth/signup}{\label{_signup}%
+Sign Up -\/\texorpdfstring{$>$}{>} /api/auth/signup}}\label{md__r_e_a_d_m_e_autotoc_md11}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}firstName"{}:\ "{}Leanne"{},}
+\DoxyCodeLine{\ \ \ \ "{}lastName"{}:\ "{}Graham"{},}
+\DoxyCodeLine{\ \ \ \ "{}username"{}:\ "{}leanne"{},}
+\DoxyCodeLine{\ \ \ \ "{}password"{}:\ "{}password"{},}
+\DoxyCodeLine{\ \ \ \ "{}email"{}:\ "{}leanne.graham@gmail.com"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_signin}%
+Log In -\/\texorpdfstring{$>$}{>} /api/auth/signin}{\label{_signin}%
+Log In -\/\texorpdfstring{$>$}{>} /api/auth/signin}}\label{md__r_e_a_d_m_e_autotoc_md12}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}usernameOrEmail"{}:\ "{}leanne"{},}
+\DoxyCodeLine{\ \ \ \ "{}password"{}:\ "{}password"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_usercreate}%
+Create User -\/\texorpdfstring{$>$}{>} /api/users}{\label{_usercreate}%
+Create User -\/\texorpdfstring{$>$}{>} /api/users}}\label{md__r_e_a_d_m_e_autotoc_md13}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}firstName"{}:\ "{}Ervin"{},}
+\DoxyCodeLine{\ \ \ \ "{}lastName"{}:\ "{}Howell"{},}
+\DoxyCodeLine{\ \ \ \ "{}username"{}:\ "{}ervin"{},}
+\DoxyCodeLine{\ \ \ \ "{}password"{}:\ "{}password"{},}
+\DoxyCodeLine{\ \ \ \ "{}email"{}:\ "{}ervin.howell@gmail.com"{},}
+\DoxyCodeLine{\ \ \ \ "{}address"{}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}street"{}:\ "{}Victor\ Plains"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}suite"{}:\ "{}Suite\ 879"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}city"{}:\ "{}Wisokyburgh"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}zipcode"{}:\ "{}90566-\/7771"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}geo"{}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ "{}lat"{}:\ "{}-\/43.9509"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ "{}lng"{}:\ "{}-\/34.4618"{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\ \ \ \ "{}phone"{}:\ "{}010-\/692-\/6593\ x09125"{},}
+\DoxyCodeLine{\ \ \ \ "{}website"{}:\ "{}http://erwinhowell.com"{},}
+\DoxyCodeLine{\ \ \ \ "{}company"{}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}name"{}:\ "{}Deckow-\/Crist"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}catchPhrase"{}:\ "{}Proactive\ didactic\ contingency"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}bs"{}:\ "{}synergize\ scalable\ supply-\/chains"{}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_userupdate}%
+Update User -\/\texorpdfstring{$>$}{>} /api/users/\{username\}}{\label{_userupdate}%
+Update User -\/\texorpdfstring{$>$}{>} /api/users/\{username\}}}\label{md__r_e_a_d_m_e_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}firstName"{}:\ "{}Ervin"{},}
+\DoxyCodeLine{\ \ \ \ "{}lastName"{}:\ "{}Howell"{},}
+\DoxyCodeLine{\ \ \ \ "{}username"{}:\ "{}ervin"{},}
+\DoxyCodeLine{\ \ \ \ "{}password"{}:\ "{}updatedpassword"{},}
+\DoxyCodeLine{\ \ \ \ "{}email"{}:\ "{}ervin.howell@gmail.com"{},}
+\DoxyCodeLine{\ \ \ \ "{}address"{}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}street"{}:\ "{}Victor\ Plains"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}suite"{}:\ "{}Suite\ 879"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}city"{}:\ "{}Wisokyburgh"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}zipcode"{}:\ "{}90566-\/7771"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}geo"{}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ "{}lat"{}:\ "{}-\/43.9509"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ "{}lng"{}:\ "{}-\/34.4618"{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\ \ \ \ "{}phone"{}:\ "{}010-\/692-\/6593\ x09125"{},}
+\DoxyCodeLine{\ \ \ \ "{}website"{}:\ "{}http://erwinhowell.com"{},}
+\DoxyCodeLine{\ \ \ \ "{}company"{}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}name"{}:\ "{}Deckow-\/Crist"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}catchPhrase"{}:\ "{}Proactive\ didactic\ contingency"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}bs"{}:\ "{}synergize\ scalable\ supply-\/chains"{}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_userinfoupdate}%
+Update User Profile -\/\texorpdfstring{$>$}{>} /api/users/set\+Or\+Update\+Info}{\label{_userinfoupdate}%
+Update User Profile -\/\texorpdfstring{$>$}{>} /api/users/set\+Or\+Update\+Info}}\label{md__r_e_a_d_m_e_autotoc_md15}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}street"{}:\ "{}Douglas\ Extension"{},}
+\DoxyCodeLine{\ \ \ \ "{}suite"{}:\ "{}Suite\ 847"{},}
+\DoxyCodeLine{\ \ \ \ "{}city"{}:\ "{}McKenziehaven"{},}
+\DoxyCodeLine{\ \ \ \ "{}zipcode"{}:\ "{}59590-\/4157"{},}
+\DoxyCodeLine{\ \ \ \ "{}companyName"{}:\ "{}Romaguera-\/Jacobson"{},}
+\DoxyCodeLine{\ \ \ \ "{}catchPhrase"{}:\ "{}Face\ to\ face\ bifurcated\ interface"{},}
+\DoxyCodeLine{\ \ \ \ "{}bs"{}:\ "{}e-\/enable\ strategic\ applications"{},}
+\DoxyCodeLine{\ \ \ \ "{}website"{}:\ "{}http://ramiro.info"{},}
+\DoxyCodeLine{\ \ \ \ "{}phone"{}:\ "{}1-\/463-\/123-\/4447"{},}
+\DoxyCodeLine{\ \ \ \ "{}lat"{}:\ "{}-\/68.6102"{},}
+\DoxyCodeLine{\ \ \ \ "{}lng"{}:\ "{}-\/47.0653"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_postcreate}%
+Create Post -\/\texorpdfstring{$>$}{>} /api/posts}{\label{_postcreate}%
+Create Post -\/\texorpdfstring{$>$}{>} /api/posts}}\label{md__r_e_a_d_m_e_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}sunt\ aut\ facere\ repellat\ provident\ occaecati\ excepturi\ optio\ reprehenderit"{},}
+\DoxyCodeLine{\ \ \ \ "{}body"{}:\ "{}quia\ et\ suscipit\ suscipit\ recusandae\ consequuntur\ expedita\ et\ cum\ reprehenderit\ molestiae\ ut\ ut\ quas\ totam\ nostrum\ rerum\ est\ autem\ sunt\ rem\ eveniet\ architecto"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_postupdate}%
+Update Post -\/\texorpdfstring{$>$}{>} /api/posts/\{id\}}{\label{_postupdate}%
+Update Post -\/\texorpdfstring{$>$}{>} /api/posts/\{id\}}}\label{md__r_e_a_d_m_e_autotoc_md17}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED"{},}
+\DoxyCodeLine{\ \ \ \ "{}body"{}:\ "{}UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ "{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_commentcreate}%
+Create Comment -\/\texorpdfstring{$>$}{>} /api/posts/\{post\+Id\}/comments}{\label{_commentcreate}%
+Create Comment -\/\texorpdfstring{$>$}{>} /api/posts/\{post\+Id\}/comments}}\label{md__r_e_a_d_m_e_autotoc_md18}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}body"{}:\ "{}laudantium\ enim\ quasi\ est\ quidem\ magnam\ voluptate\ ipsam\ eos\ tempora\ quo\ necessitatibus\ dolor\ quam\ autem\ quasi\ reiciendis\ et\ nam\ sapiente\ accusantium"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_commentupdate}%
+Update Comment -\/\texorpdfstring{$>$}{>} /api/posts/\{post\+Id\}/comments/\{id\}}{\label{_commentupdate}%
+Update Comment -\/\texorpdfstring{$>$}{>} /api/posts/\{post\+Id\}/comments/\{id\}}}\label{md__r_e_a_d_m_e_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}body"{}:\ "{}UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ UPDATED\ "{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md20}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_albumcreate}%
+Create Album -\/\texorpdfstring{$>$}{>} /api/albums}{\label{_albumcreate}%
+Create Album -\/\texorpdfstring{$>$}{>} /api/albums}}\label{md__r_e_a_d_m_e_autotoc_md20}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}quidem\ molestiae\ enim"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_albumupdate}%
+Update Album -\/\texorpdfstring{$>$}{>} /api/albums/\{id\}}{\label{_albumupdate}%
+Update Album -\/\texorpdfstring{$>$}{>} /api/albums/\{id\}}}\label{md__r_e_a_d_m_e_autotoc_md21}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}quidem\ molestiae\ enim\ UPDATED"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_photocreate}%
+Create Photo -\/\texorpdfstring{$>$}{>} /api/photos}{\label{_photocreate}%
+Create Photo -\/\texorpdfstring{$>$}{>} /api/photos}}\label{md__r_e_a_d_m_e_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}accusamus\ beatae\ ad\ facilis\ cum\ similique\ qui\ sunt"{},}
+\DoxyCodeLine{\ \ \ \ "{}url"{}:\ "{}https://via.placeholder.com/600/92c952"{},}
+\DoxyCodeLine{\ \ \ \ "{}thumbnailUrl"{}:\ "{}https://via.placeholder.com/150/92c952"{},}
+\DoxyCodeLine{\ \ \ \ "{}albumId"{}:\ 2}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md23}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_photoupdate}%
+Update Photo -\/\texorpdfstring{$>$}{>} /api/photos\{id\}}{\label{_photoupdate}%
+Update Photo -\/\texorpdfstring{$>$}{>} /api/photos\{id\}}}\label{md__r_e_a_d_m_e_autotoc_md23}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}accusamus\ beatae\ ad\ facilis\ "{},}
+\DoxyCodeLine{\ \ \ \ "{}url"{}:\ "{}https://via.placeholder.com/600/771796"{},}
+\DoxyCodeLine{\ \ \ \ "{}thumbnailUrl"{}:\ "{}https://via.placeholder.com/150/771796"{},}
+\DoxyCodeLine{\ \ \ \ "{}albumId"{}:\ 4}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md24}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_todocreate}%
+Create Todo -\/\texorpdfstring{$>$}{>} /api/todos}{\label{_todocreate}%
+Create Todo -\/\texorpdfstring{$>$}{>} /api/todos}}\label{md__r_e_a_d_m_e_autotoc_md24}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}delectus\ aut\ autem"{},}
+\DoxyCodeLine{\ \ \ \ "{}completed"{}:\ false}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md25}{}\doxysubsubsubsubsection{\texorpdfstring{\label{_todoupdate}%
+Update Todo -\/\texorpdfstring{$>$}{>} /api/todos\{id\}}{\label{_todoupdate}%
+Update Todo -\/\texorpdfstring{$>$}{>} /api/todos\{id\}}}\label{md__r_e_a_d_m_e_autotoc_md25}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ "{}title"{}:\ "{}delectus\ aut\ autem\ Updated"{},}
+\DoxyCodeLine{\ \ \ \ "{}completed"{}:\ true}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+  

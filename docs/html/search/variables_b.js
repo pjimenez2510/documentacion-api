@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['name_0',['name',['../d4/db3/classcom_1_1sopromadze_1_1blogapi_1_1model_1_1_category.html#aa9124c88e443217af8b33402177e79e1',1,'com.sopromadze.blogapi.model.Category.name'],['../d0/d6f/classcom_1_1sopromadze_1_1blogapi_1_1model_1_1_comment.html#a580ce5682b23a45d13835869875ee75a',1,'com.sopromadze.blogapi.model.Comment.name'],['../d8/d7a/classcom_1_1sopromadze_1_1blogapi_1_1model_1_1role_1_1_role.html#a4cb2e34554f94de1a75c79abf5669536',1,'com.sopromadze.blogapi.model.role.Role.name'],['../d5/dd8/classcom_1_1sopromadze_1_1blogapi_1_1model_1_1_tag.html#a47cc72117624e3a7bec088444d463aab',1,'com.sopromadze.blogapi.model.Tag.name'],['../d7/d43/classcom_1_1sopromadze_1_1blogapi_1_1model_1_1user_1_1_company.html#a390f99fd7e82f30f5ba759c6a2ea2b9a',1,'com.sopromadze.blogapi.model.user.Company.name']]]
+];

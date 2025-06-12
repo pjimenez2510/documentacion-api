@@ -1,0 +1,63 @@
+# Configuración básica del proyecto
+PROJECT_NAME           = "Blog Application - Sopromadze"
+PROJECT_NUMBER         = "1.0"
+PROJECT_BRIEF          = "Sistema de Blog con Spring Boot - Gestión de usuarios, posts, categorías y comentarios"
+
+# Directorios específicos de tu proyecto
+INPUT                  = ./src/main/java/com/sopromadze/blogapi
+OUTPUT_DIRECTORY       = ./docs
+RECURSIVE              = YES
+
+# Configuración optimizada para Java/Spring Boot
+OPTIMIZE_OUTPUT_JAVA   = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_PACKAGE        = YES
+
+# Inclusión de anotaciones Spring
+BUILTIN_STL_SUPPORT    = YES
+JAVADOC_AUTOBRIEF      = YES
+
+# Formatos de salida
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+
+# Patrones de archivos específicos
+FILE_PATTERNS          = *.java
+EXCLUDE_PATTERNS       = */test/* \
+                         */target/* \
+                         */build/*
+
+# Configuración visual mejorada
+HTML_HEADER            =
+HTML_FOOTER            =
+HTML_STYLESHEET        =
+HTML_COLORSTYLE_HUE    = 210
+HTML_COLORSTYLE_SAT    = 100
+HTML_COLORSTYLE_GAMMA  = 80
+
+# Habilitación de diagramas
+HAVE_DOT               = YES
+CLASS_DIAGRAMS         = YES
+UML_LOOK               = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+
+# Configuración específica para Spring Boot
+PREDEFINED             = "RestController=class" \
+                         "Service=class" \
+                         "Repository=interface" \
+                         "Entity=class" \
+                         "Configuration=class"
+
+# Agrupación por paquetes
+CREATE_SUBDIRS         = YES
+FULL_PATH_NAMES        = YES
+STRIP_FROM_PATH        = ./src/main/java/
+
+# Configuración de búsqueda
+SEARCHENGINE           = YES
+SERVER_BASED_SEARCH    = NO
