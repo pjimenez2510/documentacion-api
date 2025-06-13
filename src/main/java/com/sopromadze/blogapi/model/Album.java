@@ -24,18 +24,15 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @file Album.java
- * @brief Entidad que representa un álbum de fotos en el sistema
+ * Entidad que representa un álbum de fotos en el sistema.
  *
- * @author Sopromadze
- * @date Creado el [fecha de creación]
- * @version 1.0
+ * <p>Extiende de UserDateAudit para obtener campos de auditoría automáticos
+ * (fecha creación, modificación y usuario).</p>
  *
- * @class Album
- * @brief Modelo de álbum que extiende UserDateAudit para auditoría
- *
- * Esta clase representa un álbum de fotos en la aplicación, asociado a un usuario
- * y conteniendo múltiples fotos. Implementa funcionalidades de auditoría automática.
+ * @author Hamilton Jumbo
+ * @since 1.0
+ * @version 1.1
+ * @created 12 de junio de 2025
  */
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -45,41 +42,48 @@ public class Album extends UserDateAudit {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @brief Identificador único del álbum
-	 * @var id
+	 * ID único generado automáticamente para el álbum
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	/**
-	 * @brief Título del álbum
-	 * @details Debe ser único en el sistema y no puede estar vacío
-	 * @var title
+	 * Título del álbum (debe ser único en el sistema)
+	 *
+	 * <p>Validación: No puede ser nulo o vacío (@NotBlank)</p>
 	 */
 	@NotBlank
 	@Column(name = "title")
 	private String title;
 
 	/**
-	 * @brief Usuario propietario del álbum
-	 * @var user
+	 * Usuario propietario del álbum (relación ManyToOne lazy)
+	 *
+	 * <p>Mapeado a la columna user_id en la base de datos</p>
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**
-	 * @brief Lista de fotos contenidas en el álbum
-	 * @var photo
+	 * Lista de fotos contenidas en este álbum (relación OneToMany)
+	 *
+	 * <p>Configuración:
+	 * <ul>
+	 *   <li>CascadeType.ALL: Operaciones se propagan a las fotos</li>
+	 *   <li>orphanRemoval: Fotos sin álbum son eliminadas</li>
+	 * </ul>
+	 * </p>
 	 */
 	@OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Photo> photo;
 
 	/**
-	 * @brief Obtiene el usuario propietario
-	 * @return User El usuario propietario del álbum
-	 * @note Esta anotación ignora la serialización JSON
+	 * Obtiene el usuario propietario (con exclusión JSON)
+	 *
+	 * @return User objeto del propietario
+	 * @see com.sopromadze.blogapi.model.user.User
 	 */
 	@JsonIgnore
 	public User getUser() {
@@ -87,17 +91,20 @@ public class Album extends UserDateAudit {
 	}
 
 	/**
-	 * @brief Obtiene una copia inmutable de la lista de fotos
-	 * @return List<Photo> Lista de fotos o null si no hay fotos
+	 * Obtiene una copia defensiva de las fotos del álbum
+	 *
+	 * @return Lista inmutable de fotos o null si no existen
+	 * @see com.sopromadze.blogapi.model.Photo
 	 */
 	public List<Photo> getPhoto() {
 		return this.photo == null ? null : new ArrayList<>(this.photo);
 	}
 
 	/**
-	 * @brief Establece la lista de fotos del álbum
-	 * @param photo Lista de fotos a establecer
-	 * @details Convierte la lista en una lista inmutable
+	 * Establece la lista de fotos del álbum
+	 *
+	 * @param photo Lista de fotos a asignar (se convierte en inmutable internamente)
+	 * @throws IllegalArgumentException si la lista contiene fotos no válidas
 	 */
 	public void setPhoto(List<Photo> photo) {
 		if (photo == null) {

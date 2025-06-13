@@ -31,26 +31,65 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controlador REST para autenticación y registro de usuarios.
+ *
+ * <p>Maneja las operaciones de inicio de sesión y registro de nuevos usuarios
+ * con autenticación JWT.</p>
+ *
+ * @author Hamilton Jumbo
+ * @since 1.0
+ * @version 1.4
+ * @created 12 de junio de 2025
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
+	/**
+	 * Mensaje de error constante para rol de usuario no configurado
+	 */
 	private static final String USER_ROLE_NOT_SET = "User role not set";
 
+	/**
+	 * Gestor de autenticación de Spring Security
+	 */
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	/**
+	 * Repositorio para operaciones con usuarios
+	 */
 	@Autowired
 	private UserRepository userRepository;
 
+	/**
+	 * Repositorio para operaciones con roles
+	 */
 	@Autowired
 	private RoleRepository roleRepository;
 
+	/**
+	 * Codificador de contraseñas
+	 */
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	/**
+	 * Proveedor de tokens JWT
+	 */
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 
+	/**
+	 * Autentica un usuario existente en el sistema.
+	 *
+	 * <p>Valida las credenciales y retorna un token JWT si son correctas.</p>
+	 *
+	 * @param loginRequest Datos de inicio de sesión (username/email y password)
+	 * @return ResponseEntity con el token JWT de autenticación
+	 * @throws BadCredentialsException si las credenciales son incorrectas
+	 */
 	@PostMapping("/signin")
 	public ResponseEntity<JwtAuthenticationResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 		Authentication authentication = authenticationManager.authenticate(
@@ -62,6 +101,17 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 	}
 
+	/**
+	 * Registra un nuevo usuario en el sistema.
+	 *
+	 * <p>Crea un nuevo usuario con rol USER por defecto. Si es el primer usuario
+	 * registrado, también recibe rol ADMIN.</p>
+	 *
+	 * @param signUpRequest Datos del nuevo usuario (nombre, email, username, password)
+	 * @return ResponseEntity con confirmación de registro exitoso
+	 * @throws BlogapiException si el username o email ya existen
+	 * @throws AppException si no se pueden asignar los roles
+	 */
 	@PostMapping("/signup")
 	public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 		if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {

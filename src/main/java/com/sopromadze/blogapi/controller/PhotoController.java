@@ -28,8 +28,8 @@ import javax.validation.Valid;
  * @file PhotoController.java
  * @brief Controlador REST para manejar operaciones con fotos
  *
- * @author Sopromadze
- * @date Creado el [fecha de creación]
+ * @author Hamilton Jumbo
+ * @created 12 de junio de 2025
  * @version 1.0
  *
  * @class PhotoController

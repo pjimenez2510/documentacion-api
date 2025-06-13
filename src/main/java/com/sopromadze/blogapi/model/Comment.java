@@ -21,18 +21,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 /**
- * @file Comment.java
- * @brief Entidad que representa un comentario en el sistema
+ * Entidad que representa un comentario en el sistema de blog.
  *
- * @author Sopromadze
- * @date Creado el [fecha de creación]
- * @version 1.0
+ * <p>Extiende de UserDateAudit para incluir campos de auditoría automáticos
+ * (fecha de creación, modificación y usuario relacionado).</p>
  *
- * @class Comment
- * @brief Modelo de comentario que extiende UserDateAudit para auditoría
- *
- * Esta clase representa un comentario en la aplicación, asociado a un post
- * y a un usuario. Incluye validaciones para los campos.
+ * @author Hamilton Jumbo
+ * @since 1.0
+ * @version 1.3
+ * @created 12 de junio de 2025
  */
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -43,17 +40,23 @@ public class Comment extends UserDateAudit {
     private static final long serialVersionUID = 1L;
 
     /**
-     * @brief Identificador único del comentario
-     * @var id
+     * ID único generado automáticamente para el comentario
+     *
+     * <p>Estrategia: Generación por identidad de base de datos</p>
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
-     * @brief Nombre del autor del comentario
-     * @details Debe tener entre 4 y 50 caracteres
-     * @var name
+     * Nombre del autor del comentario
+     *
+     * <p>Restricciones:
+     * <ul>
+     *   <li>No puede estar vacío (@NotBlank)</li>
+     *   <li>Entre 4 y 50 caracteres (@Size)</li>
+     * </ul>
+     * </p>
      */
     @Column(name = "name")
     @NotBlank
@@ -61,9 +64,15 @@ public class Comment extends UserDateAudit {
     private String name;
 
     /**
-     * @brief Email del autor del comentario
-     * @details Debe ser un email válido y tener entre 4 y 50 caracteres
-     * @var email
+     * Email del autor del comentario
+     *
+     * <p>Validaciones:
+     * <ul>
+     *   <li>Formato de email válido (@Email)</li>
+     *   <li>No puede estar vacío (@NotBlank)</li>
+     *   <li>Entre 4 y 50 caracteres (@Size)</li>
+     * </ul>
+     * </p>
      */
     @Column(name = "email")
     @NotBlank
@@ -72,43 +81,65 @@ public class Comment extends UserDateAudit {
     private String email;
 
     /**
-     * @brief Cuerpo del comentario
-     * @details Debe tener al menos 10 caracteres
-     * @var body
+     * Contenido principal del comentario
+     *
+     * <p>Requisitos:
+     * <ul>
+     *   <li>No puede estar vacío (@NotBlank)</li>
+     *   <li>Mínimo 10 caracteres (@Size)</li>
+     * </ul>
+     * </p>
      */
     @Column(name = "body")
     @NotBlank
-    @Size(min = 10, message = "Comment body must be minimum 10 characters")
+    @Size(min = 10, message = "El cuerpo del comentario debe tener al menos 10 caracteres")
     private String body;
 
     /**
-     * @brief Post al que pertenece el comentario
-     * @var post
+     * Post al que pertenece este comentario (relación ManyToOne)
+     *
+     * <p>Configuración:
+     * <ul>
+     *   <li>Carga perezosa (FetchType.LAZY)</li>
+     *   <li>Mapeado a columna post_id</li>
+     *   <li>Ignorado en serialización JSON (@JsonIgnore)</li>
+     * </ul>
+     * </p>
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
     /**
-     * @brief Usuario que realizó el comentario
-     * @var user
+     * Usuario que realizó el comentario (relación ManyToOne)
+     *
+     * <p>Configuración:
+     * <ul>
+     *   <li>Carga perezosa (FetchType.LAZY)</li>
+     *   <li>Mapeado a columna user_id</li>
+     *   <li>Ignorado en serialización JSON (@JsonIgnore)</li>
+     * </ul>
+     * </p>
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     /**
-     * @brief Constructor con cuerpo del comentario
-     * @param body Cuerpo del comentario (mínimo 10 caracteres)
+     * Constructor con parámetro obligatorio para el cuerpo del comentario
+     *
+     * @param body Contenido del comentario (validado con @NotBlank y @Size)
+     * @throws IllegalArgumentException si el cuerpo no cumple los requisitos
      */
-    public Comment(@NotBlank @Size(min = 10, message = "Comment body must be minimum 10 characters") String body) {
+    public Comment(@NotBlank @Size(min = 10) String body) {
         this.body = body;
     }
 
     /**
-     * @brief Obtiene el post asociado
-     * @return Post El post asociado al comentario
-     * @note Esta anotación ignora la serialización JSON
+     * Obtiene el post asociado al comentario
+     *
+     * @return El objeto Post relacionado
+     * @see com.sopromadze.blogapi.model.Post
      */
     @JsonIgnore
     public Post getPost() {
@@ -116,9 +147,10 @@ public class Comment extends UserDateAudit {
     }
 
     /**
-     * @brief Obtiene el usuario que comentó
-     * @return User El usuario que realizó el comentario
-     * @note Esta anotación ignora la serialización JSON
+     * Obtiene el usuario autor del comentario
+     *
+     * @return El objeto User relacionado
+     * @see com.sopromadze.blogapi.model.user.User
      */
     @JsonIgnore
     public User getUser() {
